@@ -11,7 +11,7 @@ end
 
 get '/' do
   # binding.pry
-  @tweets = CLIENT.user_timeline
+  @tweets = CLIENT.user_timeline.map { |tweet| pig_latinizer(tweet.text) }
   erb :index
 end
 
