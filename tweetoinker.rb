@@ -3,10 +3,10 @@ require 'twitter'
 require 'pry'
 
 CLIENT = Twitter::REST::Client.new do |config|
-  config.consumer_key        = "jMuouCRuzjMNYTZ1c8aBaJK7S"
-  config.consumer_secret     = "b7ZIyHsBCxidq0T4qQhAfUvKxqgqyHr2XKjKmAjCZAq1gRI3yU"
-  config.access_token        = "56865897-P1CkEOGdogIktMG93PIEVm7NbCAIFd0yJVdkBmOyl"
-  config.access_token_secret = "Qu9Qep0dE6hwCsSPNMWxDfKkQOLHeZcaMwid51CnKnSHA"
+  config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
+  config.consumer_secret     = ENV["TWITTER_CONUMER_SECRET"]
+  config.access_token        = ENV["TWITTER_ACCESS_TOKEN"]
+  config.access_token_secret = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
 end
 
 get '/' do
