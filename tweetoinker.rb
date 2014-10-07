@@ -20,9 +20,7 @@ def pig_latinizer(string)
 end
 
 def pig_latin_logic(word)
-  if starts_with_letter?(word)
-    substitution_rule_chooser(word)
-  end
+  substitution_rule_chooser(word) if starts_with_letter?(word)
 end
 
 def substitution_rule_chooser(word)
