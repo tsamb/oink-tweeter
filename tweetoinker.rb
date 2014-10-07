@@ -20,20 +20,28 @@ def pig_latinizer(string)
     if word[0] =~ /[a-zA-Z]/
       if word[0] =~ /[AEIOUaeiou]/
         # apply vowel pig latin rule
-        word + "way"
+        vowel_rule(word)
       else
-        pattern = /\A[^AEIOUaeiou]+/
-        pig_word = word.sub(pattern, "")
-        # check for end bits like !,; etc
-        trailing_punctuation = pig_word.match(/\W+\z/).to_s
-        pig_word.sub!(/\W+\z/, "")
-        # apply consonant pig latin rule
-        word.match(pattern) { |m| pig_word = "#{pig_word}#{m}ay" }
-        # add end bits
-        pig_word += trailing_punctuation
-        # return the freshly formatted word
-        pig_word
+        consonant_rule(word)
       end
     end
   end.join(" ")
+end
+
+def vowel_rule(word)
+  word + "way"
+end
+
+def consonant_rule(word)
+  pattern = /\A[^AEIOUaeiou]+/
+  pig_word = word.sub(pattern, "")
+  # check for end bits like !,; etc
+  trailing_punctuation = pig_word.match(/\W+\z/).to_s
+  pig_word.sub!(/\W+\z/, "")
+  # apply consonant pig latin rule
+  word.match(pattern) { |m| pig_word = "#{pig_word}#{m}ay" }
+  # add end bits
+  pig_word += trailing_punctuation
+  # return the freshly formatted word
+  pig_word
 end
