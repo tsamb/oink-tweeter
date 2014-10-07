@@ -18,7 +18,7 @@ end
 def pig_latinizer(string)
   string.split(" ").map do |word|
     if starts_with_letter?(word)
-      if word[0] =~ /[AEIOUaeiou]/
+      if starts_with_vowel?(word)
         # apply vowel pig latin rule
         vowel_rule(word)
       else
@@ -30,6 +30,10 @@ end
 
 def starts_with_letter?(word)
   word[0] =~ /[a-zA-Z]/
+end
+
+def starts_with_vowel?(word)
+  word[0] =~ /[AEIOUaeiou]/
 end
 
 def vowel_rule(word)
