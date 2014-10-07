@@ -10,9 +10,13 @@ CLIENT = Twitter::REST::Client.new do |config|
 end
 
 get '/' do
-  # binding.pry
   @tweets = CLIENT.user_timeline.map { |tweet| pig_latinizer(tweet.text) }
   erb :index
+end
+
+post '/tweet' do
+  CLIENT.update(pig_latinizer(params[:tweet]))
+  redirect '/'
 end
 
 def pig_latinizer(string)
