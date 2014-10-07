@@ -36,7 +36,9 @@ def starts_with_vowel?(word)
 end
 
 def vowel_rule(word)
-  word + "way"
+  trailing_punctuation = word.match(/\W+\z/).to_s
+  word.sub!(/\W+\z/, "")
+  word + "way" + trailing_punctuation
 end
 
 def consonant_rule(word)
