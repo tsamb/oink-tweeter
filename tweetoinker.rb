@@ -38,7 +38,7 @@ def vowel_rule(word)
 end
 
 def consonant_rule(word)
-  pattern = /\A[^AEIOUaeiou]+/
+  pattern = /\A[^AEIOUaeiou_\W\d]+/
   pig_word = word.sub(pattern, "")
   # check for end bits like !,; etc
   trailing_punctuation = pig_word.match(/\W+\z/).to_s
