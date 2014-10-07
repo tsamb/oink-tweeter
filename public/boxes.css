@@ -5,7 +5,7 @@ body {
   background-image: url("skulls.png");
 }
 
-p {
+p, div {
   background-color: FFF;
   margin-left: auto;
   margin-right: auto;
@@ -14,4 +14,23 @@ p {
   border-bottom: 0 none;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
   border-radius: 5px;
+}
+
+form {
+  margin: 0, auto;
+  text-align: center;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  resize: vertical;
+}
+
+input[type="submit"] {
+  width: 25%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
 }

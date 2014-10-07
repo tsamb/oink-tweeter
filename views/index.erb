@@ -4,6 +4,12 @@
   <link rel="stylesheet" type="text/css" href="boxes.css">
 </head>
 <body>
+  <div>
+    <form action="/tweet" method="post" >
+      <textarea name="tweet" placeholder="your tweet text here"></textarea>
+      <input type="submit" value="Oink-Tweet it!">
+    </form>
+  </div>
   <% if @tweets %>
     <% @tweets.each do |tweet| %>
       <p><%= tweet %></p>
