@@ -28,7 +28,7 @@ def substitution_rule_chooser(word)
 end
 
 def starts_with_letter?(word)
-  word[0] =~ /[a-zA-Z]/
+  word[0] =~ /[a-zA-Z]/ && !(word =~ /\Ahttp/i)
 end
 
 def starts_with_vowel?(word)
