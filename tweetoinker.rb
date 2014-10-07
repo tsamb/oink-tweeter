@@ -21,8 +21,12 @@ end
 
 def pig_latin_logic(word)
   if starts_with_letter?(word)
-    starts_with_vowel?(word) ? vowel_rule(word) : consonant_rule(word)
+    substitution_rule_chooser(word)
   end
+end
+
+def substitution_rule_chooser(word)
+  starts_with_vowel?(word) ? vowel_rule(word) : consonant_rule(word)
 end
 
 def starts_with_letter?(word)
