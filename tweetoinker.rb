@@ -16,16 +16,17 @@ get '/' do
 end
 
 def pig_latinizer(string)
-  string.split(" ").map do |word|
-    if starts_with_letter?(word)
-      if starts_with_vowel?(word)
-        # apply vowel pig latin rule
-        vowel_rule(word)
-      else
-        consonant_rule(word)
-      end
+  string.split(" ").map { |word| pig_latin_logic(word) }.join(" ")
+end
+
+def pig_latin_logic(word)
+  if starts_with_letter?(word)
+    if starts_with_vowel?(word)
+      vowel_rule(word)
+    else
+      consonant_rule(word)
     end
-  end.join(" ")
+  end
 end
 
 def starts_with_letter?(word)
