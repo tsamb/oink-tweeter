@@ -21,11 +21,7 @@ end
 
 def pig_latin_logic(word)
   if starts_with_letter?(word)
-    if starts_with_vowel?(word)
-      vowel_rule(word)
-    else
-      consonant_rule(word)
-    end
+    starts_with_vowel?(word) ? vowel_rule(word) : consonant_rule(word)
   end
 end
 
