@@ -1,0 +1,13 @@
+<html>
+<head>
+  <title>TweetOinker</title>
+  <link rel="stylesheet" type="text/css" href="boxes.css">
+</head>
+<body>
+  <% if @tweets %>
+    <% @tweets.each do |tweet| %>
+      <p><%= tweet.text %></p>
+    <% end %>
+  <% end %>
+</body>
+</html>
