@@ -53,4 +53,18 @@ Click on the "Keys and Access Tokens" tab. Vlick on "modify app permissions" nex
 
 Go back to the "Keys and Access Tokens" tab, scroll to the bottom and click "Create my access token". The access token and secret are linked to your own personal Twitter account. Do not let these get out into the public, otherwise people may be able to hijack your account and tweet through your app as if they were you. If you accidentally push code containing these keys to a public location, ensure you revoke token access (on this same page) or regenerate the tokens. The same privacy rules apply for your consumer secret (for your app).
 
+## Integrate the Twitter API into your app
+The [Twitter gem docs](http://rdoc.info/gems/twitter) have good instructions on how to set up and use the Twitter API in Ruby. We will be utilizing the REST API in this app. The [configuration](http://rdoc.info/gems/twitter#Configuration0) and [usage example](http://rdoc.info/gems/twitter#Usage_Examples) on the home page of the gem docs. For a deeper dive into the methods on the REST module of the gem, check out [that section of the docs](http://rdoc.info/gems/twitter/Twitter/REST/Client).
+
+Put the following code above your first route in your app:
+
+```ruby
+CLIENT = Twitter::REST::Client.new do |config|
+  config.consumer_key        = "YOUR_CONSUMER_KEY"
+  config.consumer_secret     = "YOUR_CONSUMER_SECRET"
+  config.access_token        = "YOUR_ACCESS_TOKEN"
+  config.access_token_secret = "YOUR_ACCESS_SECRET"
+end
+```
+
 
