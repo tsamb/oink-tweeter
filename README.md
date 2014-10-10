@@ -36,8 +36,21 @@ You can stop your server by pressing `ctrl-c` in your terminal. If you run your 
 
 If you want to be able to automatically reload code without stopping and starting your server, you can `gem install shotgun` and then run `shotgun appname.rb` instead. Shotgun will use your newly coded code anytime you make a web request, so you don't have to kill the server and restart it.
 
+## Setting up to interact with Twitter
+You'll need three things before you can use the Twitter API with your app:
+  1. The Twitter gem
+  2. "Consumer keys" to authorize your app
+  3. "Access tokens" to authorize you as a Twitter user
 
+### Installing and requiring the Twitter gem
+`gem install twitter` in your terminal to install the Twitter gem. Right under `require sinatra` in your app, also `require twitter`. This will give you access the the [Twitter gem](http://rdoc.info/gems/twitter) (and hence, the Twitter API) in your code.
 
+### Generating Twitter keys and tokens
 
+Go to [apps.twitter.com](apps.twitter.com) and sign in. Click on "Create New App" in the top right hand corner. Give your app a name, description and website (you can put a link to your Twitter account in here). Read and agree to the developer rules and click "Create your Twitter application".
+
+Click on the "Keys and Access Tokens" tab. Vlick on "modify app permissions" next to "Access Level", change this to "Read and Write" and save the settings.
+
+Go back to the "Keys and Access Tokens" tab, scroll to the bottom and click "Create my access token". The access token and secret are linked to your own personal Twitter account. Do not let these get out into the public, otherwise people may be able to hijack your account and tweet through your app as if they were you. If you accidentally push code containing these keys to a public location, ensure you revoke token access (on this same page) or regenerate the tokens. The same privacy rules apply for your consumer secret (for your app).
 
 
