@@ -34,7 +34,7 @@ After setting up your "Hello world" in your ruby file, you can start your server
 
 You can stop your server by pressing `ctrl-c` in your terminal. If you run your server with the `ruby appname.rb` command, you'll need to stop and restart your server anytime you make changes to your code.
 
-If you want to be able to automatically reload code without stopping and starting your server, you can `gem install shotgun` and then run `shotgun appname.rb` instead. Shotgun will use your newly coded code anytime you make a web request, so you don't have to kill the server and restart it.
+If you want to be able to automatically reload code without stopping and starting your server, you can `gem install shotgun` and then run `shotgun appname.rb` instead. Shotgun will use your newly coded code anytime you make a web request, so you don't have to kill the server and restart it. (Note the default port for shotgun is 9393 so your site will be at `localhost:9393`.)
 
 ## Setting up to interact with Twitter
 You'll need three things before you can use the Twitter API with your app:
@@ -53,7 +53,7 @@ Click on the "Keys and Access Tokens" tab. Vlick on "modify app permissions" nex
 
 Go back to the "Keys and Access Tokens" tab, scroll to the bottom and click "Create my access token". The access token and secret are linked to your own personal Twitter account. Do not let these get out into the public, otherwise people may be able to hijack your account and tweet through your app as if they were you. If you accidentally push code containing these keys to a public location, ensure you revoke token access (on this same page) or regenerate the tokens. The same privacy rules apply for your consumer secret (for your app).
 
-## Integrate the Twitter API into your app
+## Integrating the Twitter API into your app
 The [Twitter gem docs](http://rdoc.info/gems/twitter) have good instructions on how to set up and use the Twitter API in Ruby. We will be utilizing the REST API in this app. The [configuration](http://rdoc.info/gems/twitter#Configuration0) and [usage example](http://rdoc.info/gems/twitter#Usage_Examples) on the home page of the gem docs. For a deeper dive into the methods on the REST module of the gem, check out [that section of the docs](http://rdoc.info/gems/twitter/Twitter/REST/Client).
 
 Put the following code above your first route in your app:
@@ -67,4 +67,25 @@ CLIENT = Twitter::REST::Client.new do |config|
 end
 ```
 
+Replace the keys, tokens and secrets with those that you just generated at [apps.twitter.com](apps.twitter.com).
+
+Note that we defined the `CLIENT` in all caps as a constant. Unlike a local variable (that would be defined lowercase like `client`), this constant is accessible inside the routes we write. We will be using `CLIENT` to interact with the API, including retrieving tweets and updating tweets.
+
+### Returning Twitter data to your view
+To begin, we'll plonk a string of data from Twitter onto your web page in place of "Hello world". We'll then refactor that out into an embedded Ruby HTML file and serve the HTML page to the browser.
+
+Change your root route to:
+
+```ruby
+get '/' do
+  # get an array of the latest 20 tweets from your personal timeline
+  tweets = CLIENT.user_timeline
+
+  # change every tweet object in the array into a string and join all the
+  # strings together
+  long_tweet_string = tweets.map { |tweet| tweet.text }.join("<br><br>")
+end
+```
+
+Make sure your server is running with `shotgun` or `ruby` and navigate to your site in your browser. The get method above should return a string of your latest 20 tweets, separated by double `<br>` tags.
 
