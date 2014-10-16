@@ -1,9 +1,7 @@
 $(document).ready(function() {
   $("textarea").keydown(function() {
-    $("textarea").keydown(function() {
-      updateCharacterCount.bind(this)();
-    });
-  })
+    updateCharacterCount.bind(this)();
+  });
 });
 
 function updateCharacterCount() {
@@ -11,9 +9,9 @@ function updateCharacterCount() {
   var charCount = $(this).val().length;
   $(".char-count").html(charCount);
   if (charCount > 140) {
-    textColor = "red"
+    textColor = "red";
   } else {
-    textColor = "black"
+    textColor = "black";
 }
   $(".char-count").css("color", textColor);
 }
