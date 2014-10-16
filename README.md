@@ -89,3 +89,52 @@ end
 
 Make sure your server is running with `shotgun` or `ruby` and navigate to your site in your browser. The get method above should return a string of your latest 20 tweets, separated by double `<br>` tags.
 
+### Sending real HTML to the browser with ERB
+Now that we know that we can get tweets and send them to our own front end, let's format it properly in HTML (as opposed to a string with some `<br>` tags). Change your root route to:
+```ruby
+get '/' do
+  @tweets = CLIENT.user_timeline
+  erb :index
+end
+```
+
+We put an `@` in front of `tweets` to designate that variable as an instance variable. The reason we are doing this is to make it available to the `erb` method we call on the next line. As you will soon see, we will be able to access whatever we have stored in `@tweets` in the Embedded Ruby file we are about to create.
+
+In your views folder, create a file called `index.erb`. In that file, create a stock-standard HTML layout:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Oink Tweeter</title>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+Because this is an ERB file, we can embed Ruby code in here and interpolate that into valid HTML and strings. Within your body tags, let's loop through our `@tweets` array and output the text of each tweet in a separate paragraph. It will look something like this:
+
+```erb
+<body>
+  <% @tweets.each do |tweet| %>
+    <p>
+      <%= tweet.text %>
+    </p>
+  <% end %>
+</body>
+```
+
+Here, we're looping through each tweet, creating a new `<p>` tag and interpolating the text from each tweet in here. You could play around with the [other methods on tweet objects](http://www.rubydoc.info/gems/twitter/Twitter/Tweet) here. For example, you could provide a link to the original tweet, by interpolating the `tweet.uri` into an `<a>` tag.
+
+So the full flow of our app as it stands is:
+
+  1. A user visits our root path
+  2. The user's browser sends a request to our server
+  3. Our server uses the Twitter keys it has stored to connect to Twitter and grab the latest 20 tweets in an instance variable
+  4. Our route calls the `erb` method and sends our instance variable to our `index.erb` page.
+  5. The `erb` method parses through the HTML document and inserts the text of each tweet into a paragraph tag.
+  6. Our server sends the return value of that ERB parsed HTML file back to the browser.
+  7. The user sees the latest 20 tweets on the page.
+
