@@ -1,13 +1,15 @@
 oink-tweeter
 ============
 
-# Overview
-A pig latin tweeter in a simple Sinatra framework using the Twitter gem.
+# Overview / running this app as it is
+This is a pig latin tweeter made with the Sinatra web framework using the Twitter API.
+
+You'll need the Sinatra gem and the Twitter gem:
 
 `gem install sinatra`
 `gem install twitter`
 
-You will need to set up a Twitter app at apps.twitter.com and export the hashes within your shell terminal:
+You will need to set up a Twitter app at apps.twitter.com and export the keys/tokens within your shell terminal:
 
 ```
 export TWITTER_CONSUMER_KEY=yourconsumerkeyhere
