@@ -49,3 +49,18 @@ $(document).ready(function() {
 
 Notice the `console.log` in the code above. This is good for getting feedback that your code is doing what you expect. Run your server and open up your page. Open up your JavaScript console (<cmd+opt+J> in Chrome and <cmd+opt+I> in Firefox). Now when you type in your text area, you should see "Someone pressed a key!" in the console.
 
+### Reading and updating the character count
+Each time a user types a key we want to read how many characters are in our text field and update the number in our `<span>` accordingly. Here's how we can do that:
+
+```js
+$(document).ready(function() {
+  $("textarea").keyup(function() {
+    // declare a variable that grabs the length of the string in the textarea
+    var charCount = $(this).val().length;
+
+    // replace the current html inside the span with the character count
+    $(".char-count").html(charCount);
+  });
+});
+```
+
