@@ -13,3 +13,10 @@ Create a JavaScript file and place it in your public directory. I called mine `c
 
 The first script tag is linking to the JQuery library. This will give us an easier time building our counter logic. The second tag is linking to the script we are about to write.
 
+## Setting up your page for manipulation
+Right next to the submit button in your form, add a span containing a lonely default "0". Give this span a class called 'char-count':
+
+```html
+<span class="char-count">0</span>
+```
+
