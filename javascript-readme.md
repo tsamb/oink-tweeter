@@ -33,3 +33,19 @@ $(document).ready(function() {
 
 Any code you put inside the function after the "ready" will run as soon as the page has loaded.
 
+### Binding a listener for keyboard input
+The next step is to tell our browser to listen out for any key presses and do something every time a key is pressed. We need to bind this key listener to a specific element on the page. It makes sense in this case to bind it to our `<textarea>` since that's where we write the text for our tweet.
+
+We set up the listener like this:
+
+```js
+$(document).ready(function() {
+  $("textarea").keyup(function() {
+    // code here will run when a user presses keys while a textarea is in focus
+    console.log("Someone pressed a key!");
+  });
+});
+```
+
+Notice the `console.log` in the code above. This is good for getting feedback that your code is doing what you expect. Run your server and open up your page. Open up your JavaScript console (<cmd+opt+J> in Chrome and <cmd+opt+I> in Firefox). Now when you type in your text area, you should see "Someone pressed a key!" in the console.
+
