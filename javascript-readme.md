@@ -64,3 +64,34 @@ $(document).ready(function() {
 });
 ```
 
+### Disabling the button at 140 characters
+When we hit 140 characters in our text field, we want to disable the tweet button and turn our character count red. This means that we need to check on each key up whether we have passed this threshold. If it's over the threshold, turn the counter red and disable the button. If it's under the threshold (or goes below the threshold after going over), then make sure the counter is black and the button is enabled.
+
+This is how we do that:
+
+```js
+$(document).ready(function() {
+  $("textarea").keyup(function() {
+    var charCount = $(this).val().length;
+    $(".char-count").html(charCount);
+
+    // declare variables so they are accessible in our conditional
+    var textColor, buttonDisabled;
+
+    // change the variables depending on whether the count is above or below the max characters
+    if (charCount > 140) {
+      textColor = "red";
+      buttonDisabled = true;
+    } else {
+      textColor = "black";
+      buttonDisabled = false;
+    }
+
+    // use the variables to change the count color and set the enabled-ness of the button
+    $(".char-count").css("color", textColor);
+    $("input[type='submit']").prop("disabled", buttonDisabled);
+  });
+});
+```
+
+
