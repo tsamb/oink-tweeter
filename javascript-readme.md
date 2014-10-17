@@ -20,3 +20,16 @@ Right next to the submit button in your form, add a span containing a lonely def
 <span class="char-count">0</span>
 ```
 
+## Writing the JavaScript
+
+### Waiting for the rest of the page
+We want our JS file to run only once all of the other elements on our page have loaded. So we begin by wrapping everything in the following JQuery function:
+
+```js
+$(document).ready(function() {
+  // your code will eventually go here
+});
+```
+
+Any code you put inside the function after the "ready" will run as soon as the page has loaded.
+
