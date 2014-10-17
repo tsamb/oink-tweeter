@@ -94,4 +94,10 @@ $(document).ready(function() {
 });
 ```
 
+## Wrap-up
+There you have it: a simple JS counter for text input. You can make plenty of improvements to this code.
 
+Here's a challenge in the form of a few questions:
+  1. What happens when you have multiple textarea tags on the one page?
+  2. How do you make sure you only count the characters from that textarea?
+  3. And how do you make sure each textarea only updates its own counter and disables its own form's button?
