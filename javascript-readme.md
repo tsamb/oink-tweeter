@@ -3,7 +3,7 @@
 ## Overview
 To create a counter for our text field, we need to make some subtle changes to our HTML and write a short script to listen for keystrokes and update a counter when that listener fires.
 
-## Linking file and JQuery
+## Linking to the JS file and JQuery library
 Create a JavaScript file and place it in your public directory. I called mine `character-count.js`. In your HTML file (`index.erb` in this case) add the following two `<script>` tags in the `<></head>`:
 
 ```html
