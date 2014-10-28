@@ -45,15 +45,5 @@ def vowel_rule(word)
 end
 
 def consonant_rule(word)
-  pattern = /\A[^AEIOUaeiou_\W\d]+/
-  pig_word = word.sub(pattern, "")
-  # check for end bits like !,; etc
-  trailing_punctuation = pig_word.match(/\W+\z/).to_s
-  pig_word.sub!(/\W+\z/, "")
-  # apply consonant pig latin rule
-  word.match(pattern) { |m| pig_word = "#{pig_word}#{m}ay" }
-  # add end bits
-  pig_word += trailing_punctuation
-  # return the freshly formatted word
-  pig_word
+  word.gsub(/(\A[^AEIOUaeiou_\W\d]+)(\w+)/, '\2\1ay')
 end
