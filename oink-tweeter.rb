@@ -39,11 +39,9 @@ def starts_with_vowel?(word)
 end
 
 def vowel_rule(word)
-  trailing_punctuation = word.match(/\W+\z/).to_s
-  word.sub!(/\W+\z/, "")
-  word + "way" + trailing_punctuation
+  word.sub(/(\w+)/, '\1way')
 end
 
 def consonant_rule(word)
-  word.gsub(/(\A[^AEIOUaeiou_\W\d]+)(\w+)/, '\2\1ay')
+  word.sub(/(\A[^AEIOUaeiou_\W\d]+)(\w+)/, '\2\1ay')
 end
