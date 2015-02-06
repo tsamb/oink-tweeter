@@ -2,7 +2,7 @@ oink-tweeter
 ============
 
 # Overview / running this app as it is
-This is a pig latin tweeter made with the Sinatra web framework using the Twitter API.
+This is a pig latin tweeter made with the [Sinatra](http://www.sinatrarb.com/) web framework using the [Twitter API](https://dev.twitter.com/rest/public).
 
 You'll need the Sinatra gem and the Twitter gem:
 
