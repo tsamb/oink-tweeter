@@ -140,3 +140,60 @@ So the full flow of our app as it stands is:
   6. Our server sends the return value of that ERB parsed HTML file back to the browser.
   7. The user sees the latest 20 tweets on the page.
 
+### Translating from English to Pig Latin
+
+Currently, we're essentially replicating our own Twitter profile. Let's mix it up a bit and translate our tweets into pig latin before we send them down to the browser.
+
+We need to write a method that takes a tweet (a string) and outputs a modified version of that string, pig-latinized. This is a nice little challenge to undertake if you know (or want to learn) a bit of Ruby.
+
+We're going to adhere to the following pig latin rules:
+
+1. For words that start with consonants, move all of the consonants to the end of the word and add "ay";
+2. For words that start with vowels, simply add "way" to the end of the word.
+
+So, for example:  
+* "an awesome pig latin translator"  
+becomes  
+* "anway awesomeway igpay atinlay anslatorway"  
+
+I implemented this logic in Ruby using regular expressions. These are powerful pattern matching tools that have a long history ([back to 1956!](https://en.wikipedia.org/wiki/Regular_expression#History)) and are implemented across many languages including Ruby. You could write your own pig latin translator using Ruby's string or array manipulation methods, too.
+
+Let's walk through my translator, method by method:
+
+```ruby
+def substitution_rule_chooser(word)
+  starts_with_vowel?(word) ? vowel_rule(word) : consonant_rule(word)
+end
+```
+Here, we define a method that takes a word as an argument. Then whether or not that word starts with a vowel, one of two other methods will be run: applying the vowel rule, or applying the consonant rule.
+
+```ruby
+def starts_with_vowel?(word)
+  word[0] =~ /[AEIOUaeiou]/
+end
+```
+This method determines whether or not the first letter of a word is a vowel. `word[0]` is the first character of the argument we pass in. If that character matches our regular expression, any of the characters within the square brackets, then it will return a truthy value, otherwise it will return nil, which is falsey. [Here's the Ruby Docs entry for the matcher operator.](http://www.ruby-doc.org/core-2.2.0/String.html#method-i-3D-7E)
+
+```ruby
+def vowel_rule(word)
+  word.sub(/(\w+)/, '\1way')
+end
+```
+This method substitutes the whole word, for the whole word with "way" appended. [Here's the Ruby Docs entry for #sub](http://www.ruby-doc.org/core-2.2.0/String.html#method-i-sub), if you want to read more.
+
+```ruby
+def consonant_rule(word)
+  word.sub(/(\A[^AEIOUaeiou_\W\d]+)(\w+)/, '\2\1ay')
+end
+```
+Finally, here's the method to move the consonants to the end and tack on an "ay". This ones a little trickier than the vowel rule. Let's break down the regular expression a bit. Forward slashes encapsulate our regular expressions. So the actual regular expression here is `(\A[^AEIOUaeiou_\W\d]+)(\w+)`. We put the parentheses around two parts of this regular expression since we want to grab whatever is matched within those parts and save them to use later.
+
+Within the first parentheses, the `\A` represents the start of the string. It says, "hey, whatever I tell you to match, make sure it starts at the start". The square brackets with the carrot `[^]` says to match anything **other** than the characters within these square brackets. In our case, we are saying match anything other than upper or lower case vowels or underscores. The `\W` and `\d` matchers represent non-word characters and numerals respectively. Finally, the `+` outside the square brackets says "give me one or more of these things". So ultimately our first match within the parentheses says "give me all of the non-vowel, non-numeric characters that are at the start of this string".
+
+Within the second set of parentheses, the `\w` matcher simply asks for any word character (basically anything other than a symbol). Combine that with a plus and we are simply saying "give me the rest of the letters in this string".
+
+Now that we have those two parts of our word captured, we can substitute them in reverse order. The `\1` in the second argument of our #sub method represents the first match, our consonants, and the `\2` represents the second match, the rest of our word. So, we replace our entire word with `\2\1ay`.
+
+### Translating tweets before we send them to the browser  
+
+Now we need to use our translation methods to pig latinize our tweet timeline before we send it to the browser.
